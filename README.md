@@ -7,5 +7,3 @@ Controller is where your server do shit
 View is what shit your client see
 
 Model is where you store shit
-
-Testting for branch
