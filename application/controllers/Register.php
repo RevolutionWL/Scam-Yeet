@@ -9,6 +9,7 @@ class Register extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('encryption');
         $this->load->model('register_model');
+        $this->load->helper('captcha');
     }
 
     // Function to check password strength (must consist number,uppercase,lowercase and symbol)
@@ -25,7 +26,35 @@ class Register extends CI_Controller {
 
     function index() {
 
-        $this->load->view('register');
+        // Captcha configuration
+        $config = array(
+            'img_path'      => 'Icaptcha/',
+            'img_url'       => base_url().'Icaptcha/',
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '160',
+            'img_height'    => 50,
+            'word_length'   => 8,
+            'font_size'     => 30,
+            'pool'          =>  'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+            'colors'        => array(
+                                        'background' => array(0, 0, 0),
+                                        'border' => array(255, 255, 255),
+                                        'text' => array(255, 255, 255),
+                                        'grid' => array(255, 40, 40)
+                                    )
+        );
+
+        $captcha = create_captcha($config);
+
+        // Unset previous captcha and set new captcha word
+        $this->session->unset_userdata('captchaCode');
+        $this->session->set_userdata('captchaCode', $captcha['word']);
+
+        // Pass captcha image to view
+        $data['captchaImg'] = $captcha['image'];
+
+        // Load the view
+        $this->load->view('register', $data);
 
     }
 
@@ -45,56 +74,68 @@ class Register extends CI_Controller {
 
         if($this->form_validation->run()) {
 
-            $verification_key = md5(rand());
-            $hashed_password = password_hash($this->input->post('user_pass'),PASSWORD_BCRYPT);
-            $data = array (
-                'name'              => $this->input->post('user_name'),
-                'email'             => $this->input->post('user_email'),
-                'password'          => $hashed_password,
-                'verification_key'  => $verification_key
-            );
-            $id = $this->register_model->insert($data);
+            $inputCaptcha = $this->input->post('captcha');
+            $sessCaptcha = $this->session->userdata('captchaCode');
+    
+            if($inputCaptcha === $sessCaptcha) {
 
-            if($id > 0) {
-
-                $subject = "Verify your account";
-                $message = "<p>Howdy ".$this->input->post('user_name')."!</p>
-                            <p>Verify your account 
-                            <a href='".base_url()."register/verifies/".$verification_key."'>here</a></p>";
-
-                $config = array(
-                    'protocol'      =>  'smtp',
-                    'smtp_host'     =>  'ssl://smtp.gmail.com',
-                    'smtp_port'     =>  465,
-                    'smtp_user'     =>  'revotube.assist@gmail.com',
-                    'smtp_pass'     =>  'INFS3202',
-                    'newline'       =>  "\r\n",
-                    'mailtype'      =>  'html',
-                    'smtp_timeout'  =>  60,
-                    'charset'       =>  'iso-8859-1',
-                    'wordwrap'      =>  TRUE
+                $verification_key = md5(rand());
+                $hashed_password = password_hash($this->input->post('user_pass'),PASSWORD_BCRYPT);
+                $data = array (
+                    'name'              => $this->input->post('user_name'),
+                    'email'             => $this->input->post('user_email'),
+                    'password'          => $hashed_password,
+                    'verification_key'  => $verification_key
                 );
-                $this->load->library('email', $config);
-                $this->email->from('','Sebastian @ RevoTube_Support');
-                $this->email->to($this->input->post('user_email'));
-                $this->email->subject($subject);
-                $this->email->message($message);
+                $id = $this->register_model->insert($data);
+
+                if($id > 0) {
+
+                    $subject = "Verify your account";
+                    $message = "<p>Howdy ".$this->input->post('user_name')."!</p>
+                                <p>Verify your account 
+                                <a href='".base_url()."register/verifies/".$verification_key."'>here</a></p>";
+
+                    $config = array(
+                        'protocol'      =>  'smtp',
+                        'smtp_host'     =>  'ssl://smtp.gmail.com',
+                        'smtp_port'     =>  465,
+                        'smtp_user'     =>  'revotube.assist@gmail.com',
+                        'smtp_pass'     =>  'INFS3202',
+                        'newline'       =>  "\r\n",
+                        'mailtype'      =>  'html',
+                        'smtp_timeout'  =>  60,
+                        'charset'       =>  'iso-8859-1',
+                        'wordwrap'      =>  TRUE
+                    );
+                    $this->load->library('email', $config);
+                    $this->email->from('','Sebastian @ RevoTube_Support');
+                    $this->email->to($this->input->post('user_email'));
+                    $this->email->subject($subject);
+                    $this->email->message($message);
 
 
-                if($this->email->send()) {
-                    
-                    $this->session->set_flashdata('message', 'We\'ve sent you an email! <br>
-                    Check your inbox for the verification email and link!');
-                    redirect('register');
+                    if($this->email->send()) {
+                        
+                        $this->session->set_flashdata('message', 'We\'ve sent you an email! <br>
+                        Check your inbox for the verification email and link!');
+                        redirect('register');
 
+                    }
+                    else {
+
+                        show_error($this->email->print_debugger());
+                        return false;
+
+                    }
+        
                 }
-                else {
+            }
+            else {
 
-                    show_error($this->email->print_debugger());
-                    return false;
-
-                }
-       
+                $this->session->set_flashdata('error', 'Wrong Captcha!');
+                redirect('register');
+                
             }
         }
         else {
@@ -104,6 +145,38 @@ class Register extends CI_Controller {
         }
     }
 
+
+    function refresh() {
+
+        $config = array(
+            'img_path'      => 'Icaptcha/',
+            'img_url'       => base_url().'Icaptcha/',
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '160',
+            'img_height'    => 50,
+            'word_length'   => 8,
+            'font_size'     => 30,
+            'pool'          =>  'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+            'colors'        => array(
+                                        'background' => array(0, 0, 0),
+                                        'border' => array(255, 255, 255),
+                                        'text' => array(255, 255, 255),
+                                        'grid' => array(255, 40, 40)
+                                    )
+        );
+        //Create another captcha
+        $captcha = create_captcha($config);
+            
+        // Unset previous captcha and set new captcha word
+        $this->session->unset_userdata('captchaCode');
+        $this->session->set_userdata('captchaCode', $captcha['word']);
+                        
+        // Pass captcha image to view
+        $data['captchaImg'] = $captcha['image'];
+        echo $captcha['image'];
+
+    }
+    
     function verifies() {
 
         if($this->uri->segment(3)) {

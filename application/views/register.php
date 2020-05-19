@@ -9,6 +9,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
+        <!-- Script for refreshing captcha -->
+        <script>
+        $(document).ready(function(){
+            $('.refreshCaptcha').on('click', function(){
+                $.get('<?php echo base_url().'register/refresh'; ?>', function(data){
+                    $('#captImg').html(data);
+                });
+            });
+        });
+        </script>
+
         <style type = "text/css">
             
             body {
@@ -69,7 +80,14 @@
                         if($this->session->flashdata('message')) {
 
                             echo'<div class="alert alert-success">
-                                    '.$this->session->flashdata("message").'
+                                '.$this->session->flashdata("message").'
+                                </div>';
+
+                        }
+                        else if ($this->session->flashdata('error')){
+
+                            echo'<div class="alert alert-danger">
+                                '.$this->session->flashdata("error").'
                                 </div>';
 
                         }
@@ -93,6 +111,12 @@
                             <label>Password</label>
                             <input type="password" name="user_pass" class="form-control" value="<?php echo set_value('user_pass'); ?>"/>
                             <span class ="text-danger"><?php echo form_error('user_pass'); ?></span>
+                        </div>
+                        
+                        <div class="form-group">
+                        <p id="captImg"><?php echo $captchaImg; ?></p>
+                        <p>Can't read the image? click <a href="javascript:void(0);" class="refreshCaptcha">here</a> to refresh.</p>
+                            <input type="text" name="captcha" value=""/>
                         </div>
 
                         <!-- <div class="form-group">

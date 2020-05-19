@@ -92,25 +92,10 @@ class Captcha extends CI_Controller
         }
     }
     
-    public function refresh(){
+    function refresh() {
+
         // Captcha configuration
-        $config = array(
-            'img_path'      => 'Icaptcha/',
-            'img_url'       => base_url().'Icaptcha/',
-            'font_path'     => './path/to/fonts/texb.ttf',
-            'img_width'     => '160',
-            'img_height'    => 50,
-            'word_length'   => 8,
-            'font_size'     => 30,
-            'pool'          =>  'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-            'colors'        => array(
-                'background' => array(0, 0, 0),
-                'border' => array(255, 255, 255),
-                'text' => array(255, 255, 255),
-                'grid' => array(255, 40, 40)
-        )
-        );
-        $captcha = create_captcha($config);
+        $captcha = create_captcha();
         
         // Unset previous captcha and set new captcha word
         $this->session->unset_userdata('captchaCode');
