@@ -97,7 +97,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- php syntax for if log in -->
                         <?php if($this->session->userdata('id')): ?>
@@ -112,6 +112,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="home/logout">Log me out onegai</a>
                             </div>
+                        </li>
+                        <?php elseif (!$this->session->userdata('id')): ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
                         </li>
                         <?php endif; ?>
 
