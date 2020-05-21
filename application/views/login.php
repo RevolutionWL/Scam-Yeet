@@ -36,6 +36,7 @@
                 color: grey;
             }
 
+
         </style>
 
         <title>RevoTube Login</title>
@@ -83,11 +84,13 @@
                             <a href="<?php echo base_url(); ?>forgot">Forgot Password?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="submit" name="login" value="Login" class="btn btn-info"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo base_url(); ?>register">Register</a>
-
+                            
                         </div>
 
+                        <a href="<?php echo base_url(); ?>home" class="btn btn-Primary" role ="button">Home</a>
+
                     </form>
-                    
+
                 </div>
 
             </div>
