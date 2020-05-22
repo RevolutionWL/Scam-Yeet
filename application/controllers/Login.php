@@ -13,7 +13,7 @@ class Login extends CI_Controller {
 
     }
 
-    function index() {
+    public function index() {
         if($this->session->userdata('id')) {
 
             redirect('home');
@@ -26,7 +26,7 @@ class Login extends CI_Controller {
 
     }
 
-    function validation() {
+    public function validation() {
 
         $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('user_pass', 'Password', 'required');

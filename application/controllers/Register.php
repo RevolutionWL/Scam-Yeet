@@ -24,7 +24,7 @@ class Register extends CI_Controller {
 
     }
 
-    function index() {
+    public function index() {
 
         if($this->session->userdata('id')) {
 
@@ -64,7 +64,7 @@ class Register extends CI_Controller {
     }
 
 
-    function validation() {
+    public function validation() {
 
         // Check that username field is not empty and unique (trim - remove whitespace before and after)
         $this->form_validation->set_rules('user_name', 'Name', 'required|trim|is_unique[register.name]');
@@ -151,7 +151,7 @@ class Register extends CI_Controller {
     }
 
 
-    function refresh() {
+    public function refresh() {
 
         $config = array(
             'img_path'      => 'Icaptcha/',
@@ -182,7 +182,7 @@ class Register extends CI_Controller {
 
     }
     
-    function verifies() {
+    public function verifies() {
 
         if($this->uri->segment(3)) {
 

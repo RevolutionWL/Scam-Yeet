@@ -10,7 +10,7 @@ class Home extends CI_Controller {
 
     }
 
-    function index() {
+    public function index() {
 
         if($this->session->userdata('id')) {
 
@@ -30,7 +30,7 @@ class Home extends CI_Controller {
 
     }
 
-    function logout() {
+    public function logout() {
 
 
         $this->session->sess_destroy();
