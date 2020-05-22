@@ -139,7 +139,7 @@
 
         <div class="album py-5 bg-light">
             <div class="container">
-                <?php if (count($vid_list)) { ?>
+                <?php if ($vid_list) { ?>
                     <div class="row">
                         <?php foreach ($vid_list as $vid) : ?>
                             <div class="col-md-4">
@@ -148,7 +148,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>
-                                         <p class="card-text"><?= $vid->description; ?></p>
+                                        <p class="card-text"><?= $vid->description; ?></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -160,13 +160,13 @@
                                 </div>
                             </div>
                         <?php endforeach ?>
+                    <?php } else { ?>
+                        <h3>Sumimasen senpai no videos were uploaded ;w; <br />Onnegai senapi~ please click this button to upload </h4>
+                            <a href="<?= base_url() . 'upload'; ?>" class="btn btn-primary">Upload</a>
                     </div>
-                <?php } else { ?>
-                    <h3>Sumimasen senpai no videos were uploaded ;w; <br />Onnegai senapi~ please click this button to upload </h4>
-                        <a href="<?= base_url() . 'upload'; ?>" class="btn btn-primary">upload</a>
-                    <?php } ?>
+                <?php } ?>
 
-                    <!-- <div class="row">
+                <!-- <div class="row">
                         <div class="col-md-4">
                             <div class="card mb-4 shadow-sm">
                                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
