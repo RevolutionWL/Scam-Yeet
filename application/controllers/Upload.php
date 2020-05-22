@@ -10,7 +10,7 @@ class Upload extends CI_Controller {
         
     }
 
-    function index() {
+    public function index() {
         if($this->session->userdata('id')) {
 
             $this->load->view('upload', array('error' => ' ' ));
@@ -24,7 +24,7 @@ class Upload extends CI_Controller {
     }
     
     
-    function do_upload(){
+    public function do_upload(){
 
         $this->form_validation->set_rules('vid_title', 'Title', 'required');
         $this->form_validation->set_rules('vid_desc', 'Description', 'required');

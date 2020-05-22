@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class Captcha extends CI_Controller
 {
-    function __construct() {
+    public function __construct() {
         parent::__construct();
         
         // Load session library
@@ -96,7 +96,7 @@ class Captcha extends CI_Controller
         }
     }
     
-    function refresh() {
+    public function refresh() {
 
         // Captcha configuration
         $captcha = create_captcha();
