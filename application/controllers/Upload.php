@@ -10,9 +10,17 @@ class Upload extends CI_Controller {
         
     }
 
-    function index()
-    {
-        $this->load->view('upload', array('error' => ' ' ));
+    function index() {
+        if($this->session->userdata('id')) {
+
+            $this->load->view('upload', array('error' => ' ' ));
+        }
+
+        else {
+
+            redirect('home');
+
+        }
     }
     
     

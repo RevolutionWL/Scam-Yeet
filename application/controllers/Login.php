@@ -14,9 +14,15 @@ class Login extends CI_Controller {
     }
 
     function index() {
+        if($this->session->userdata('id')) {
 
-        $this->load->view('login');
+            redirect('home');
+        }
+        else {
 
+            $this->load->view('login');
+
+        }
 
     }
 

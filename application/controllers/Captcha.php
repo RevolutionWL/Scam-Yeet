@@ -12,7 +12,11 @@ class Captcha extends CI_Controller
     }
     
     public function index(){
-        
+        if($this->session->userdata('id')) {
+
+            redirect('home');
+        }
+
         // Captcha configuration
         $config = array(
             'img_path'      => 'Icaptcha/',

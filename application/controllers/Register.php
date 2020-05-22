@@ -26,6 +26,11 @@ class Register extends CI_Controller {
 
     function index() {
 
+        if($this->session->userdata('id')) {
+
+            redirect('home');
+        }
+
         // Captcha configuration
         $config = array(
             'img_path'      => 'Icaptcha/',
