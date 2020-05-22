@@ -28,6 +28,7 @@
           <tr>
             <th>Title</th>
             <th>Description</th>
+            <th>Author</th>
             <th>Video</th>
           </tr>
         </thead>
@@ -36,6 +37,7 @@
           <tr>
             <td><?=$vid->title;?></td>
             <td><?=$vid->description;?></td>
+            <td><?=$vid->author;?></td>
             <td><a href="<?=base_url().'uploads/'.$vid->video;?>" target="_blank"><video src="<?=base_url().'uploads/'.$vid->video;?>" width="100"></a></td>
           </tr>
         <?php endforeach ?>

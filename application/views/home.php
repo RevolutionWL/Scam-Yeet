@@ -102,7 +102,7 @@
                         <!-- php syntax for if log in -->
                         <?php if($this->session->userdata('id')): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Upload</a>
+                            <a class="nav-link" href="upload">Upload</a>
                         </li> 
 
                         <li class="nav-item dropdown">

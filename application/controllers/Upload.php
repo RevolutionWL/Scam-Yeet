@@ -41,10 +41,14 @@ class Upload extends CI_Controller {
             }
             else {
 
+                    $this->db->where('id', $this->session->userdata('id'));
+                    $info = $this->db ->get('register')->row_array();
+                
                     $upload_video = $this->upload->data();
                     $data = array (
                         'title'         =>  $this->input->post('vid_title'),
                         'description'   =>  $this->input->post('vid_desc'),
+                        'author'        =>  $info['name'],
                         'video'         =>  $upload_video['file_name']
                     );
 
