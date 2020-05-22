@@ -21,6 +21,8 @@ class Home extends CI_Controller {
         }
         $info['vid_list'] = $this->video_model->get_all_vid();
 
+        $info['vid_list'] = $this->video_model->get_all_vid();
+        
         $this->load->view('home', $info);
 
     }
@@ -30,7 +32,7 @@ class Home extends CI_Controller {
 
         $this->session->sess_destroy();
     
-        redirect('login');
+        redirect('home');
 
 
 
