@@ -6,7 +6,7 @@ class Home extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
-
+        $this->load->model('video_model');
 
     }
 
@@ -17,9 +17,7 @@ class Home extends CI_Controller {
             $this->db->where('id', $this->session->userdata('id'));
             $info = $this->db ->get('register')->row_array();
 
-            // echo '<h1 align= "center">Welcome '.$info['name'].'</h1>';
-            // echo '<p align= "center"> PLEASE LOG OUT 
-            //      <a href= "'.base_url().'home/logout"> HERE</a> NOW</p>';
+            $info['vid_list'] = $this->video_model->get_all_vid();
 
             $this->load->view('home', $info);
 
