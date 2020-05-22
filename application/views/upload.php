@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label>Video Title</label>
-                    <input type="text" name="vid_title" class="form-control" value="<?php echo set_value ('vid_title'); ?>"/>
+                    <input type="text" name="vid_title" class="form-control" value="<?php echo set_value('vid_title'); ?>"/>
                     <span class="text-danger"><?php echo form_error('vid_title'); ?></span>
                 </div>
 
