@@ -87,9 +87,9 @@
                             
                         </div>
 
-                        <a href="<?php echo base_url(); ?>home" class="btn btn-Primary" role ="button">Home</a>
-
                     </form>
+
+                    <a class="btn btn-danger" href="<?php echo base_url(); ?>home"  role="button">Home</a>
 
                 </div>
 
