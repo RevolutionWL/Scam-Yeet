@@ -163,7 +163,7 @@
                     </div>
                 <?php } else { ?>
                     <h3>Sumimasen senpai no videos were uploaded ;w; <br />Onnegai senapi~ please click this button to upload </h4>
-                        <a href="<?= base_url() . 'upload'; ?>" class="btn btn-primary">upload</a>
+                        <a href="<?= base_url().'upload'; ?>" class="btn btn-primary">upload</a>
                     <?php } ?>
 
                     <!-- <div class="row">
