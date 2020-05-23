@@ -19,12 +19,8 @@ class Profile extends CI_Controller {
 
             $this->db->where('id', $this->session->userdata('id'));
             $info = $this->db ->get('register')->row_array();
-            // $data = array(
-            //     "profile"   =>  'yes'
-            // );
-            // $this->db->update('register', $data);
-
             $this->load->view('profile',$info);
+            
         }
         else {
 
