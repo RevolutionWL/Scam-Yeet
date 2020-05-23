@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.0.1">
-    <title>Album example · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
 
@@ -66,6 +65,9 @@
             margin-bottom: .25rem;
         }
     </style>
+
+    <title>RevoTube</title>
+
 </head>
 
 <body>

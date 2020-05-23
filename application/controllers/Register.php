@@ -124,7 +124,7 @@ class Register extends CI_Controller {
                         
                         $this->session->set_flashdata('message', 'We\'ve sent you an email! <br>
                         Check your inbox for the verification email and link!');
-                        redirect('register');
+                        redirect('login');
 
                     }
                     else {
