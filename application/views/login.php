@@ -54,9 +54,16 @@
                 <div class="content">
 
                     <?php
-                        if($this->session->flashdata('message')) {
+                        if($this->session->flashdata('error')) {
 
                             echo'<div class="alert alert-warning">
+                                    '.$this->session->flashdata("error").'
+                                </div>';
+
+                        }
+                        else if($this->session->flashdata('message')) {
+
+                            echo'<div class="alert alert-success">
                                     '.$this->session->flashdata("message").'
                                 </div>';
 

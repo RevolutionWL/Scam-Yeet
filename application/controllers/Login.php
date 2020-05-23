@@ -37,12 +37,24 @@ class Login extends CI_Controller {
 
             if($result == '') {
 
-                redirect('home');
+                $this->db->where('id', $this->session->userdata('id'));
+                $info = $this->db ->get('register')->row_array();
+                
+                if($info['profile'] == 'no') {
+    
+                    redirect('profile');
+    
+                }
+                else {
+
+                    redirect('home');
+
+                }
 
             }
             else {
                 
-                $this->session->set_flashdata('message', $result);
+                $this->session->set_flashdata('error', $result);
                 redirect('login');
 
             }
