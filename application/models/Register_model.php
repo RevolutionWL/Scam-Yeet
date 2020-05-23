@@ -31,4 +31,12 @@ class Register_model extends CI_Model {
 
     }
 
+    function update($data) {
+
+        $this->db->where('id', $this->session->userdata('id'));
+        $this->db->update('register', $data);
+
+
+    }
+
 }

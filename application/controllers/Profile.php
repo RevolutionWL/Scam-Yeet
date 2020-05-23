@@ -7,8 +7,7 @@ class Profile extends CI_Controller {
 
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->library('encryption');
-        $this->load->model('login_model');
+        $this->load->model('register_model');
 
 
     }
@@ -20,16 +19,40 @@ class Profile extends CI_Controller {
 
             $this->db->where('id', $this->session->userdata('id'));
             $info = $this->db ->get('register')->row_array();
-            $data = array(
-                "profile"   =>  'yes'
-            );
-            $this->db->update('register', $data);
+            // $data = array(
+            //     "profile"   =>  'yes'
+            // );
+            // $this->db->update('register', $data);
 
             $this->load->view('profile',$info);
         }
         else {
 
             redirect('home');
+
+        }
+
+    }
+
+    public function save() {
+
+        $this->form_validation->set_rules('contact', 'contact', 'numeric');
+
+        if ($this->form_validation->run()) {
+            $data = array (
+                'firstname' => $this->input->post('firstname'),
+                'lastname'  => $this->input->post('lastname'),
+                'contact'   => $this->input->post('contact'),
+                'profile'   => 'yes'
+            );
+
+            $this->register_model->update($data);
+
+            redirect('profile');
+        }
+        else {
+
+            $this->index();
 
         }
 
