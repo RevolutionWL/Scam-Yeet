@@ -32,6 +32,7 @@ class Profile extends CI_Controller {
 
     public function save() {
 
+        $this->form_validation->set_rules('firstname', 'firstname', 'required');
         $this->form_validation->set_rules('contact', 'contact', 'numeric');
 
         if ($this->form_validation->run()) {

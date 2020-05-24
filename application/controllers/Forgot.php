@@ -25,6 +25,7 @@ class Forgot extends CI_Controller {
         }
     }
 
+    //Send reset password link
     public function sendlink() {
 
         $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email');
@@ -33,6 +34,7 @@ class Forgot extends CI_Controller {
 
             $data = $this->input->post('user_email');
 
+            //Check if user email exist in database
             if ($this->register_model->checkemail($data)) {
 
                 $this->session->set_userdata('email', $data);
@@ -51,7 +53,7 @@ class Forgot extends CI_Controller {
                 else {
 
                     $temp = md5(rand());
-                    $this->session->set_tempdata('code', $temp, 60);
+                    $this->session->set_tempdata('code', $temp, 300);
                     $message = "<p>Howdy there!</p>
                     <p>You've requested to reset your password</p>
                     <p>Click on this link to reset it now.</p> 
@@ -89,8 +91,9 @@ class Forgot extends CI_Controller {
                 }
                 else {
 
-                    show_error($this->email->print_debugger());
-                    return false;
+                    $this->session->set_flashdata('error', 'I don\'t know why or how you triggered it <br>
+                    Report this problem thx!');
+                    redirect('login');
 
                 }
             }
@@ -109,6 +112,7 @@ class Forgot extends CI_Controller {
 
     }
 
+    //Validate the reset password link 
     public function validate() {
 
         if($this->uri->segment(3) == $this->session->tempdata('code')) {
@@ -125,6 +129,7 @@ class Forgot extends CI_Controller {
 
     }
 
+    //Check password strength 
     public function password_check($str) {
         
         if (preg_match('#[0-9]#', $str) && preg_match('#[a-z]#', $str) && preg_match('#[A-Z]#', $str) && preg_match('#[\W]#', $str)) {
@@ -136,6 +141,7 @@ class Forgot extends CI_Controller {
 
     }
 
+    //Reset password
     public function reset() {
 
         $this->form_validation->set_rules('password', 'Password', 'required|callback_password_check', 
@@ -147,6 +153,7 @@ class Forgot extends CI_Controller {
 
             $password   = $this->input->post('password');
             $rpassword  = $this->input->post('rpassword');
+            
             if ($password === $rpassword){
 
                 $hashed_password = password_hash($password,PASSWORD_BCRYPT);
@@ -170,8 +177,6 @@ class Forgot extends CI_Controller {
             $this->load->view('reset');
 
         }
-
-
 
     }
 

@@ -129,8 +129,9 @@ class Register extends CI_Controller {
                     }
                     else {
 
-                        show_error($this->email->print_debugger());
-                        return false;
+                        $this->session->set_flashdata('error', 'I don\'t know why or how you triggered it <br>
+                        Report this problem thx!');
+                        redirect('login');
 
                     }
         
@@ -150,7 +151,7 @@ class Register extends CI_Controller {
         }
     }
 
-
+    //Captcha refresh to generate another one
     public function refresh() {
 
         $config = array(
@@ -182,6 +183,7 @@ class Register extends CI_Controller {
 
     }
     
+    //Verifies if email is verified
     public function verifies() {
 
         if($this->uri->segment(3)) {
@@ -212,7 +214,12 @@ class Register extends CI_Controller {
         }
         else {
 
-            //Redirect to somewhere with message of something
+            $data["message"] = "<h1 align='center'> The link seems
+            to be invalid.
+            <br>
+            Please contact us or retry the link 
+            <a href='".base_url()."home'>home</a>
+            </h1>";
 
         }
 
