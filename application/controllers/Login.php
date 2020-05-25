@@ -43,9 +43,9 @@ class Login extends CI_Controller {
 
                 if ($this->input->post("setremember"))
                 {
-
-                    $this->input->set_cookie('email', $email, 0); /* Create cookie for store emailid */
-                    $this->input->set_cookie('password', $pass, 0); /* Create cookie for password */
+                    //Create cookies for 10 years
+                    $this->input->set_cookie('email', $email, (time() + (10 * 365 * 24 * 60 * 60))); 
+                    $this->input->set_cookie('password', $pass, (time() + (10 * 365 * 24 * 60 * 60))); 
                     
                 }
                 else
