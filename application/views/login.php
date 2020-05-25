@@ -28,9 +28,13 @@
                 background: #f2f3f7;
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
                 padding: 50px 30px 50px 30px;
-            }            
-            .form-group {
+            }
+                        
+            .form-group:first-child {
                 margin-bottom: 40px;
+            }
+            .form-group:nth-child(2) {
+                margin-bottom:15px;
             }
             .form-row a:first-child {
                 color: grey;
@@ -74,16 +78,20 @@
 
                         <div class="form-group">
 
-                            <input type="text" name="user_email" class="form-control" value="<?php echo set_value('user_email'); ?>" placeholder="Email Address" />
+                            <input type="text" name="user_email" class="form-control" value="<?php if(get_cookie('email')) { echo get_cookie('email'); }?>" placeholder="Email Address">
                             <span class="text-danger"><?php echo form_error('user_email'); ?></span>
 
                         </div>
 
                         <div class="form-group">
 
-                            <input type="password" name="user_pass" class="form-control" value="<?php echo set_value('user_password'); ?>" placeholder="Password"/>
+                            <input type="password" name="user_pass" class="form-control" value="<?php if(get_cookie('password')) { echo get_cookie('password'); }?>" placeholder="Password">
                             <span class="text-danger"><?php echo form_error('user_pass'); ?></span>
 
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="setremember" value="remember" 
+                            <?php if (get_cookie('email')) { ?> checked="checked" <?php } ?>>Remember me
                         </div>
 
                         <div class="form-row" align="right">

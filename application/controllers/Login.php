@@ -14,6 +14,7 @@ class Login extends CI_Controller {
     }
 
     public function index() {
+        
         if($this->session->userdata('id')) {
 
             redirect('home');
@@ -33,9 +34,27 @@ class Login extends CI_Controller {
 
         if($this->form_validation->run()) {
 
-            $result = $this->login_model->validate_user($this->input->post('user_email'),$this->input->post('user_pass'));
+            $email  =   $this->input->post('user_email');
+            $pass   =   $this->input->post('user_pass');
+
+            $result = $this->login_model->validate_user($email,$pass);
 
             if($result == '') {
+
+                if ($this->input->post("setremember"))
+                {
+                    //Create cookies for 10 years
+                    $this->input->set_cookie('email', $email, (time() + (10 * 365 * 24 * 60 * 60))); 
+                    $this->input->set_cookie('password', $pass, (time() + (10 * 365 * 24 * 60 * 60))); 
+                    
+                }
+                else
+                {
+
+                    delete_cookie('email'); /* Delete email cookie */
+                    delete_cookie('password'); /* Delete password cookie */
+                    
+                }
 
                 $this->db->where('id', $this->session->userdata('id'));
                 $info = $this->db ->get('register')->row_array();
