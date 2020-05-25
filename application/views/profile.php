@@ -24,6 +24,10 @@
             user-select: none;
         }
 
+        .btn {
+            width: 100%;
+        }
+
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
@@ -35,41 +39,41 @@
 </head>
 
 <body class="bg-light">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-            <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="#">RevoTube</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="#">RevoTube</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- php syntax for if log in -->
+                    <?php if ($this->session->userdata('id')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upload">Upload</a>
                         </li>
-                        <!-- php syntax for if log in -->
-                        <?php if ($this->session->userdata('id')) : ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="upload">Upload</a>
-                            </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <?php echo $name; ?>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="profile">my pwofile owo</a>
-                                    <a class="dropdown-item" href="home/logout">Log me out onegai</a>
-                                </div>
-                            </li>
-                        <?php elseif (!$this->session->userdata('id')) : ?>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
-                            </li>
-                        <?php endif; ?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php echo $name; ?>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="profile">my pwofile owo</a>
+                                <a class="dropdown-item" href="home/logout">Log me out onegai</a>
+                            </div>
+                        </li>
+                    <?php elseif (!$this->session->userdata('id')) : ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
+                        </li>
+                    <?php endif; ?>
 
-                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
     <div class="container">
         <div class="py-5 text-center">
             <!-- <img class="d-block mx-auto mb-4" src="images\ProfileIcon.svg" alt="" width="72" height="72"> -->
@@ -80,7 +84,7 @@
         <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Your Details idk</span>
+                    <span class="text-muted">Your Details</span>
                     <span class="badge badge-secondary badge-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
@@ -129,21 +133,15 @@
             </div>
             <div class="col-md-8 order-md-1">
                 <h4 class="mb-3">Update Profile</h4>
-                <form class="needs-validation" novalidate>
+                <form method="post" action="<?php echo base_url(); ?>profile/save" role="form">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
+                            <input class="form-control" type="text" name="firstname" value=<?php echo $firstname; ?>>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lastName">Last name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <input class="form-control" name="lastname" type="text" value=<?php echo $lastname; ?>>
                         </div>
                     </div>
 
@@ -153,116 +151,49 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">@</span>
                             </div>
-                            <input type="text" class="form-control" id="username" placeholder="Username" required>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
+                            <input class="form-control" type="text" id="username" value=<?php echo $name; ?> readonly>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                        <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
-                        </div>
+                        <input class="form-control" type="email" value=<?php echo $email; ?> readonly>
                     </div>
 
                     <div class="mb-3">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                        <div class="invalid-feedback">
-                            Please enter your shipping address.
-                        </div>
+                        <label for="address">Contact</label>
+                        <input class="form-control" name="contact" type="text" value=<?php echo $contact; ?>>
+                        <span class="text-danger"><?php echo form_error('contact'); ?></span>
                     </div>
+
+                    <hr class="mb-4">
+
+                    <h4>Change Password</h4>
+                    <p class="text-muted">You may leave these fields blank if you do not wish to change your password.</p>
 
                     <div class="mb-3">
-                        <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="country">Country</label>
-                            <select class="custom-select d-block w-100" id="country" required>
-                                <option value="">Choose...</option>
-                                <option>United States</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="state">State</label>
-                            <select class="custom-select d-block w-100" id="state" required>
-                                <option value="">Choose...</option>
-                                <option>California</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please provide a valid state.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="zip">Zip</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Zip code required.
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-
-                    <h4 class="mb-3">Payment</h4>
-
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                            <label class="custom-control-label" for="credit">Credit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="debit">Debit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="paypal">PayPal</label>
-                        </div>
+                        <label for="address">Current Password</label>
+                        <input class="form-control" name="password" type="password">
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="cc-name">Name on card</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                            <small class="text-muted">Full name as displayed on card</small>
-                            <div class="invalid-feedback">
-                                Name on card is required
-                            </div>
+                            <label for="password">New Password</label>
+                            <input type="password" class="form-control" id="new-password" placeholder="">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="cc-number">Credit card number</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Credit card number is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Expiration</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Expiration date required
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-cvv">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Security code required
-                            </div>
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirm-password" placeholder="">
                         </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                    <div class="form-group row">
+                        <div class="col-md-6 mb-3">
+                            <input type="reset" class="btn btn-info" value="Cancel">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input type="submit" class="btn btn-primary" value="Save">
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
