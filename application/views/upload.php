@@ -50,14 +50,14 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <!-- php syntax for if log in -->
-                    <?php if (isset($_SESSION['id'])){?>
+                    <?php if (isset($_SESSION['id'])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="upload">Upload</a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php $_SESSION['name'];?>
+                                <?php echo $_SESSION['name']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="profile">my pwofile owo</a>
@@ -78,7 +78,7 @@
             <h2>Upload a Video</h2>
         </div>
         <div class="col-md-7 order-md-2 center">
-            <?php echo $error; ?>
+            <span class="text-danger"><?php echo $error; ?></span>
             <?php echo form_open_multipart('upload/do_upload'); ?>
             <div class="mb-3">
                 <label for="vid_title">Video Title</label>
