@@ -92,7 +92,7 @@
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="#">RevoTube</a>
+                <a class="navbar-brand" href="home">RevoTube</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -131,8 +131,8 @@
 
         <section class="jumbotron text-center">
             <div class="container">
-                <h1>Album example</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                <h1>Videos of the World</h1>
+                <p class="lead text-muted">Search for any videos!</p>
                 <form class="form-inline row justify-content-md-center">
                     <input class="form-control col-8 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success col-3" type="submit">Search</button>

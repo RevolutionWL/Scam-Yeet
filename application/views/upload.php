@@ -1,62 +1,126 @@
 <html>
 
 
-    <head>
-            
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-        <style type = "text/css">
-                    
-            body {
-                color: #fff;
-                background: #63738a;
-                font-family: 'Roboto', sans-serif;
+<head>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .center {
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
             }
-            .panel-head {
-                width: 600px;
-                margin: 0 auto;
-                color: #999;
-                border-radius: 3px;
-                margin-bottom: 15px;
-                background: #f2f3f7;
-                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-                padding: 30px;
-            }
+        }
+    </style>
 
-        </style>
+    <title>Video Upload</title>
+</head>
 
-        <title>Upload Form</title>
-    </head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="home">RevoTube</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- php syntax for if log in -->
+                    <?php if ($this->session->userdata('id')) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="upload">Upload</a>
+                        </li>
 
-    <body>
-        <div class ="container">
-            <div class="panel-head">
-                <?php echo $error;?>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <?php //echo $name; 
+                                ?>
+                                temporary
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="profile">my pwofile owo</a>
+                                <a class="dropdown-item" href="home/logout">Log me out onegai</a>
+                            </div>
+                        </li>
+                    <?php elseif (!$this->session->userdata('id')) : ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
+                        </li>
+                    <?php endif; ?>
 
-                <?php echo form_open_multipart('upload/do_upload');?>
-
-                <div class="form-group">
-                    <label>Video Title</label>
-                    <input type="text" name="vid_title" class="form-control" value="<?php echo set_value('vid_title'); ?>"/>
-                    <span class="text-danger"><?php echo form_error('vid_title'); ?></span>
-                </div>
-
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" name="vid_desc" class="form-control" value="<?php echo set_value('vid_desc'); ?>"/>
-                    <span class ="text-danger"><?php echo form_error('vid_desc'); ?></span>
-                </div>
-                    <input type="file" name="video" size="20" />
-
-                    <br /><br />
-
-                    <input type="submit" value="upload" class="btn btn-info"/>
-
-                </form>
             </div>
         </div>
-    </body> 
+    </nav>
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Upload a Video</h2>
+        </div>
+        <div class="col-md-7 order-md-2 center">
+            <?php echo $error; ?>
+            <?php echo form_open_multipart('upload/do_upload'); ?>
+            <div class="mb-3">
+                <label for="vid_title">Video Title</label>
+                <input type="text" name="vid_title" class="form-control" value="<?php echo set_value('vid_title'); ?>" required />
+                <span class="text-danger"><?php echo form_error('vid_title'); ?></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="vid_desc">Description</label>
+                <input type="text" name="vid_desc" class="form-control" value="<?php echo set_value('vid_desc'); ?>" required />
+                <span class="text-danger"><?php echo form_error('vid_desc'); ?></span>
+            </div>
+
+            <div class="mb-3">
+                <input type="file" name="video" size="20" />
+            </div>
+            <hr class="mb-4">
+            <div class="form-group row">
+                <div class="col-md-12 mb-3">
+                    <input type="submit" class="btn btn-primary" value="Upload">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2020 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.5/js/vendor/jquery.slim.min.js"><\/script>')
+    </script>
+    <script src="https://getbootstrap.com/docs/4.5/dist/js/bootstrap.bundle.js"></script>
+</body>
+
 </html>
