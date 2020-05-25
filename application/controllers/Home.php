@@ -20,8 +20,6 @@ class Home extends CI_Controller {
 
         }
         $info['vid_list'] = $this->video_model->get_all_vid();
-
-        $info['vid_list'] = $this->video_model->get_all_vid();
         
         $this->load->view('home', $info);
 
