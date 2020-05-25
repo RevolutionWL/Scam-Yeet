@@ -15,11 +15,9 @@ class Profile extends CI_Controller {
     public function index() {
 
 
-        if($this->session->userdata('id')) {
+        if(isset($_SESSION['id'])) {
 
-            $this->db->where('id', $this->session->userdata('id'));
-            $info = $this->db ->get('register')->row_array();
-            $this->load->view('profile',$info);
+            $this->load->view('profile');
             
         }
         else {

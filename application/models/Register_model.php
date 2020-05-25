@@ -36,7 +36,7 @@ class Register_model extends CI_Model {
     //Update profile data - Profile.php
     function update($data) {
 
-        $this->db->where('id', $this->session->userdata('id'));
+        $this->db->where('id', $_SESSION['id']);
         $this->db->update('register', $data);
 
 
@@ -60,7 +60,7 @@ class Register_model extends CI_Model {
     //Update/Reset user password - Forgot.php
     function reset($data) {
 
-        $this->db->where('email', $this->session->userdata('email'));
+        $this->db->where('email', $_SESSION['email']);
         $this->db->update('register', $data);
 
     }

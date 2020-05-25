@@ -11,7 +11,7 @@ class Upload extends CI_Controller {
     }
 
     public function index() {
-        if($this->session->userdata('id')) {
+        if(isset($_SESSION['id'])) {
 
             $this->load->view('upload', array('error' => ' ' ));
         }
@@ -48,15 +48,12 @@ class Upload extends CI_Controller {
 
             }
             else {
-
-                    $this->db->where('id', $this->session->userdata('id'));
-                    $info = $this->db ->get('register')->row_array();
                 
                     $upload_video = $this->upload->data();
                     $data = array (
                         'title'         =>  $this->input->post('vid_title'),
                         'description'   =>  $this->input->post('vid_desc'),
-                        'author'        =>  $info['name'],
+                        'author'        =>  $_SESSION['name'],
                         'video'         =>  $upload_video['file_name']
                     );
 

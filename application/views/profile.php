@@ -50,25 +50,25 @@
                         <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <!-- php syntax for if log in -->
-                    <?php if ($this->session->userdata('id')) : ?>
+                    <?php if (isset($_SESSION['id'])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="upload">Upload</a>
                         </li>
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php echo $name; ?>
+                                <?php echo $_SESSION['name']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="profile">my pwofile owo</a>
                                 <a class="dropdown-item" href="home/logout">Log me out onegai</a>
                             </div>
                         </li>
-                    <?php elseif (!$this->session->userdata('id')) : ?>
+                    <?php } else{ ?>
                         <li class="nav-item active">
                             <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
                         </li>
-                    <?php endif; ?>
+                    <?php } ?>
 
             </div>
         </div>
@@ -84,11 +84,11 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
-                        <input class="form-control" type="text" name="firstname" value=<?php echo $firstname; ?>>
+                        <input class="form-control" type="text" name="firstname" value=<?php echo $_SESSION['firstname']; ?>>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
-                        <input class="form-control" name="lastname" type="text" value=<?php echo $lastname; ?>>
+                        <input class="form-control" name="lastname" type="text" value=<?php echo $_SESSION['lastname']; ?>>
                     </div>
                 </div>
 
@@ -98,18 +98,18 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input class="form-control" type="text" id="username" value=<?php echo $name; ?> readonly>
+                        <input class="form-control" type="text" id="username" value=<?php echo $_SESSION['name']; ?> readonly>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" value=<?php echo $email; ?> readonly>
+                    <input class="form-control" type="email" value=<?php echo $_SESSION['email']; ?> readonly>
                 </div>
 
                 <div class="mb-3">
                     <label for="address">Contact</label>
-                    <input class="form-control" name="contact" type="text" value=<?php echo $contact; ?>>
+                    <input class="form-control" name="contact" type="text" value=<?php echo $_SESSION['contact']; ?>>
                     <span class="text-danger"><?php echo form_error('contact'); ?></span>
                 </div>
 

@@ -14,7 +14,9 @@ class Login_model extends CI_Model {
                     
                     if(password_verify($password, $row->password)) {
 
-                        $this->session->set_userdata('id', $row->id);
+                        $this->db->where('email', $email);
+                        $data = $this->db->get('register')->row_array();
+                        $this->session->set_userdata($data);
 
                     }
                     else {

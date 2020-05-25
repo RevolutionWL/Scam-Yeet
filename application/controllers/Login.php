@@ -15,7 +15,7 @@ class Login extends CI_Controller {
 
     public function index() {
         
-        if($this->session->userdata('id')) {
+        if(isset($_SESSION['id'])) {
 
             redirect('home');
         }
@@ -55,11 +55,8 @@ class Login extends CI_Controller {
                     delete_cookie('password'); /* Delete password cookie */
                     
                 }
-
-                $this->db->where('id', $this->session->userdata('id'));
-                $info = $this->db ->get('register')->row_array();
                 
-                if($info['profile'] == 'no') {
+                if($_SESSION['profile'] == 'no') {
     
                     redirect('profile');
     
