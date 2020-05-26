@@ -147,7 +147,7 @@
                         <?php foreach ($vid_list as $vid) : ?>
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
-                                    <a href="<?= base_url() . 'uploads/' . $vid->video; ?>" target="_blank"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
+                                    <a href="<?= base_url() . 'video/play/' . $vid->video; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>

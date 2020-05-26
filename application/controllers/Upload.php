@@ -63,7 +63,7 @@ class Upload extends CI_Controller {
 
                     //store pic data to the db
                     $this->video_model->store_video($data);
-                    redirect('allvideo');
+                    redirect('home');
                 
             }
         }
