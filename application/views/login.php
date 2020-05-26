@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
         <style type= "text/css" >
 
@@ -35,6 +37,9 @@
             }
             .form-group:nth-child(2) {
                 margin-bottom:15px;
+            }
+            .g-recaptcha {
+                margin-bottom: 20px;
             }
             .form-row a:first-child {
                 color: grey;
@@ -93,7 +98,7 @@
                             <input type="checkbox" name="setremember" value="remember" 
                             <?php if (get_cookie('email')) { ?> checked="checked" <?php } ?>>Remember me
                         </div>
-
+                        <div class="g-recaptcha" data-sitekey="6LcwA_wUAAAAAI7GHhW_m_PEyOus8ClCQVuG7Snm"></div>
                         <div class="form-row" align="right">
                         
                             <a href="<?php echo base_url(); ?>forgot">Forgot Password?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

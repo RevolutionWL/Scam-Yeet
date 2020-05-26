@@ -32,53 +32,82 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('user_pass', 'Password', 'required');
 
-        if($this->form_validation->run()) {
+        $recaptResp = trim($this->input->post('g-recaptcha-response'));
+        
+        //Google reCaptcha v2 key
+        $secret = '6LcwA_wUAAAAAG3ZPJH03j-j4oJxCdvHaOjEpRMI';   
 
-            $email  =   $this->input->post('user_email');
-            $pass   =   $this->input->post('user_pass');
+        //API request to google to verity reCaptcha
+        $url="https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$recaptResp;
+ 
+        //Set up cURL widget to retrieve response from API
+        $ch = curl_init(); 
+        curl_setopt($ch, CURLOPT_URL, $url); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+        $output = curl_exec($ch); 
+        curl_close($ch);      
+        
+        /*API Response is a JSON object
+        Therefore decode it to PHP variable*/
+        $status = json_decode($output, true);
 
-            $result = $this->login_model->validate_user($email,$pass);
+        if($status['success']) {
 
-            if($result == '') {
+            if($this->form_validation->run()) {
 
-                if ($this->input->post("setremember"))
-                {
-                    //Create cookies for 10 years
-                    $this->input->set_cookie('email', $email, (time() + (10 * 365 * 24 * 60 * 60))); 
-                    $this->input->set_cookie('password', $pass, (time() + (10 * 365 * 24 * 60 * 60))); 
+                $email  =   $this->input->post('user_email');
+                $pass   =   $this->input->post('user_pass');
+
+                $result = $this->login_model->validate_user($email,$pass);
+
+                if($result == '') {
+
+                    if ($this->input->post("setremember"))
+                    {
+                        //Create cookies for 10 years
+                        $this->input->set_cookie('email', $email, (time() + (10 * 365 * 24 * 60 * 60))); 
+                        $this->input->set_cookie('password', $pass, (time() + (10 * 365 * 24 * 60 * 60))); 
+                        
+                    }
+                    else
+                    {
+
+                        delete_cookie('email'); /* Delete email cookie */
+                        delete_cookie('password'); /* Delete password cookie */
+                        
+                    }
                     
-                }
-                else
-                {
+                    if($_SESSION['profile'] == 'no') {
+        
+                        redirect('profile');
+        
+                    }
+                    else {
 
-                    delete_cookie('email'); /* Delete email cookie */
-                    delete_cookie('password'); /* Delete password cookie */
-                    
-                }
-                
-                if($_SESSION['profile'] == 'no') {
-    
-                    redirect('profile');
-    
+                        redirect('home');
+
+                    }
+
                 }
                 else {
-
-                    redirect('home');
+                    
+                    $this->session->set_flashdata('error', $result);
+                    redirect('login');
 
                 }
 
             }
             else {
-                
-                $this->session->set_flashdata('error', $result);
-                redirect('login');
+
+                $this->index();
 
             }
 
         }
-        else {
+        else{
 
-            $this->index();
+            $this->session->set_flashdata('error', 'Recaptcha Unsuccessful');
+            redirect('login');
 
         }
 
