@@ -13,6 +13,12 @@ class Upload extends CI_Controller {
     public function index() {
         if(isset($_SESSION['id'])) {
 
+            if($this->session->tempdata()) {
+
+                $this->load->view('upload', $this->session->tempdata());
+                
+            }
+
             $this->load->view('upload', array('error' => ' ' ));
         }
 
@@ -43,8 +49,9 @@ class Upload extends CI_Controller {
 
             if (!$this->upload->do_upload('video')) {
 
-                $error = array('error' => $this->upload->display_errors());
-                $this->load->view('upload', $error);
+                $error = array( 'error' => $this->upload->display_errors());
+                $this->session->set_tempdata($error, 5);
+                redirect('upload');
 
             }
             else {
