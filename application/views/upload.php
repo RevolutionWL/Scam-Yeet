@@ -10,15 +10,6 @@
     <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
         .btn {
             width: 100%;
         }
@@ -26,53 +17,13 @@
         .center {
             margin: 0 auto;
         }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
     </style>
 
     <title>Video Upload</title>
 </head>
 
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="home">RevoTube</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo base_url(); ?>home">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <!-- php syntax for if log in -->
-                    <?php if (isset($_SESSION['id'])) { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="upload">Upload</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php echo $_SESSION['name']; ?>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="profile">my pwofile owo</a>
-                                <a class="dropdown-item" href="home/logout">Log me out onegai</a>
-                            </div>
-                        </li>
-                    <?php } else { ?>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="<?php echo base_url(); ?>login">Login <span class="sr-only">(current)</span></a>
-                        </li>
-                    <?php } ?>
-
-            </div>
-        </div>
-    </nav>
+    <?php $this->load->view('header') ?>
     <div class="container">
         <div class="py-5 text-center">
             <h2>Upload a Video</h2>

@@ -16,7 +16,7 @@ class Profile extends CI_Controller {
 
 
         if(isset($_SESSION['id'])) {
-
+            
             $this->load->view('profile');
             
         }
