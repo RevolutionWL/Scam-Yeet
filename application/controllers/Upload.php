@@ -13,9 +13,9 @@ class Upload extends CI_Controller {
     public function index() {
         if(isset($_SESSION['id'])) {
 
-            if($this->session->tempdata()) {
-
-                $this->load->view('upload', $this->session->tempdata());
+            if($this->session->flashdata()) {
+                
+                $this->load->view('upload', $this->session->flashdata());
                 
             }
 
@@ -32,8 +32,8 @@ class Upload extends CI_Controller {
     
     public function do_upload(){
 
-        $this->form_validation->set_rules('vid_title', 'Title', 'required');
-        $this->form_validation->set_rules('vid_desc', 'Description', 'required');
+        $this->form_validation->set_rules('vid_title', 'Title', 'required|trim');
+        $this->form_validation->set_rules('vid_desc', 'Description', 'required|trim');
 
         if ($this->form_validation->run()) {
 
@@ -49,8 +49,10 @@ class Upload extends CI_Controller {
 
             if (!$this->upload->do_upload('video')) {
 
-                $error = array( 'error' => $this->upload->display_errors());
-                $this->session->set_tempdata($error, 5);
+                $error = array( 'error' =>  $this->upload->display_errors(),
+                                'title' =>  $this->input->post('vid_title'),
+                                'desc'  =>  $this->input->post('vid_desc'));
+                $this->session->set_flashdata($error);
                 redirect('upload');
 
             }

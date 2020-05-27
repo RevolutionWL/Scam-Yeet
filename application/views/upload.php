@@ -82,13 +82,14 @@
             <?php echo form_open_multipart('upload/do_upload'); ?>
             <div class="mb-3">
                 <label for="vid_title">Video Title</label>
-                <input type="text" name="vid_title" class="form-control" value="<?php echo set_value('vid_title'); ?>" required />
+                <input type="text" name="vid_title" class="form-control" value="<?php if($this->session->flashdata()){ echo $title; }
+                else {echo set_value('vid_title');} ?>" required />
                 <span class="text-danger"><?php echo form_error('vid_title'); ?></span>
             </div>
 
             <div class="mb-3">
                 <label for="vid_desc">Description</label>
-                <textarea type="text" name="vid_desc" class="form-control" rows="10" value="<?php echo set_value('vid_desc'); ?>" required ></textarea>
+                <textarea name="vid_desc" class="form-control" rows="10" required><?php if($this->session->flashdata()){ echo($desc);}?> </textarea>
                 <span class="text-danger"><?php echo form_error('vid_desc'); ?></span>
             </div>
 
