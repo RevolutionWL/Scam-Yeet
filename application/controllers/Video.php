@@ -5,6 +5,7 @@ class Video extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('video_model');
+        $this->load->model('comment_model');
         $this->load->helper('download');
         $this->load->helper('file');
         
@@ -20,8 +21,8 @@ class Video extends CI_Controller {
 
         if (file_exists("./uploads/".$_SESSION['video'])) {
 
-
-            $this->load->view('video');
+            $comment['all_comment'] = $this->comment_model->get_all_comments($_SESSION['vid_id']); 
+            $this->load->view('video', $comment);
 
         }
         else {
@@ -38,5 +39,24 @@ class Video extends CI_Controller {
         $content = file_get_contents(base_url().'uploads/'.$_SESSION['video']);
         force_download($_SESSION['title'].$_SESSION['type'], $content);
 
+    }
+
+    public function post() {
+
+        if(isset($_SESSION['id'])) {
+            $username = $_SESSION['name'];
+        }
+        else {
+            $username = $this->input->ip_address();
+        }
+
+
+        $data = array(
+            'vid_id'    =>  $_SESSION['vid_id'],
+            'user'      =>  $username,
+            'content'   =>  $this->input->post('comment'));
+
+        $this->comment_model->comment($data);
+        redirect('video/play/'.$_SESSION['vid_id']);
     }
 }
