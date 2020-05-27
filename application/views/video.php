@@ -18,6 +18,10 @@
                 }
             #top {
               margin-bottom: 20px;
+              border-style: solid;
+            }
+            #top h1{
+              margin-top: 0;
             }
             form {
               padding:10px;
@@ -27,10 +31,7 @@
               margin-bottom: 10px;
             }
             .container {
-
                 margin-left: 50px;
-
-
             }
             /* width */
             ::-webkit-scrollbar {

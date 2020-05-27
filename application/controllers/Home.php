@@ -19,15 +19,18 @@ class Home extends CI_Controller {
 
     public function logout() {
 
-
-        $this->session->sess_destroy();
-    
+        $this->session->sess_destroy();    
         redirect('home');
 
-
-
     }
-    
+
+    public function search() {
+
+        $keyword = $this->input->post('keyword');
+        $info['vid_list'] = $this->video_model->search_vid($keyword);
+        $this->load->view('home',$info);
+
+    }    
 
 }
 ?>

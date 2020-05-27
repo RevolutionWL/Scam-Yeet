@@ -133,9 +133,9 @@
             <div class="container">
                 <h1>Videos of the World</h1>
                 <p class="lead text-muted">Search for any videos!</p>
-                <form class="form-inline row justify-content-md-center">
-                    <input class="form-control col-8 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success col-3" type="submit">Search</button>
+                <form class="form-inline row justify-content-md-center" method="post" action="<?php echo base_url().'home/search'; ?>" >
+                    <input class="form-control col-8 mr-sm-2" type="search" name="keyword" placeholder="Search">
+                    <input class="btn btn-outline-success col-3" type="submit" value="Search"></input>
                 </form>
             </div>
         </section>

@@ -15,5 +15,14 @@ class Video_model extends CI_Model{
         $this->db->insert('video', $data);
         
     }
+
+    //Search Video
+    function search_vid($keyword) {
+
+        $this->db->like('title',$keyword);
+        $vid_res  =   $this->db->get('video');
+        return $vid_res->result();
+
+    }
     
 }

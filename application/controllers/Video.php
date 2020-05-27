@@ -11,6 +11,7 @@ class Video extends CI_Controller {
         
     }
 
+    //Play video
     public function play() {
 
         $id = $this->uri->segment(3);
@@ -33,7 +34,7 @@ class Video extends CI_Controller {
 
     }  
     
-
+    //Download Video
     public function download() {
 
         $content = file_get_contents(base_url().'uploads/'.$_SESSION['video']);
@@ -41,6 +42,7 @@ class Video extends CI_Controller {
 
     }
 
+    //Post Comment
     public function post() {
 
         if(isset($_SESSION['id'])) {
