@@ -5,21 +5,27 @@ class Video extends CI_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('video_model');
-        $this->load->library('form_validation');
+        $this->load->helper('download');
+        $this->load->helper('file');
         
-    }
-
-    public function index() {
-        $this->load->view('video');
     }
 
     public function play() {
 
         $vid = $this->uri->segment(3);
         $this->db->where('video',$vid);
-        $data = $this->db->get('video')->row_array();
+        $vid = $this->db->get('video')->row_array();
+        $this->session->set_userdata($vid);
 
-        $this->load->view('video',$data);
+        $this->load->view('video');
+
+    }  
+    
+
+    public function download() {
+
+        $content = file_get_contents(base_url().'uploads/'.$_SESSION['video']);
+        force_download($_SESSION['title'].$_SESSION['type'], $content);
 
     }
 }
