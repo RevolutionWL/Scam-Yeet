@@ -74,7 +74,7 @@ class Register extends CI_Controller {
             Check that password field is not empty and strong 
             If password is not strong, an error message is set for it 
         */
-        $this->form_validation->set_rules('user_pass', 'Password', 'required|callback_password_check', 
+        $this->form_validation->set_rules('user_pass', 'Password', 'required|min_length[6]|callback_password_check', 
                                             array('password_check' => 'Must contain a number, uppercase, lowercase & symbol'));
 
         if($this->form_validation->run()) {
@@ -83,7 +83,8 @@ class Register extends CI_Controller {
             $sessCaptcha = $this->session->userdata('captchaCode');
     
             if($inputCaptcha === $sessCaptcha) {
-
+                
+                $this->session->unset_userdata('captchaCode');
                 $verification_key = md5(rand());
                 $hashed_password = password_hash($this->input->post('user_pass'),PASSWORD_BCRYPT);
                 $data = array (
