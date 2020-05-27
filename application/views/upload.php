@@ -88,7 +88,7 @@
 
             <div class="mb-3">
                 <label for="vid_desc">Description</label>
-                <input type="text" name="vid_desc" class="form-control" value="<?php echo set_value('vid_desc'); ?>" required />
+                <textarea type="text" name="vid_desc" class="form-control" rows="10" value="<?php echo set_value('vid_desc'); ?>" required ></textarea>
                 <span class="text-danger"><?php echo form_error('vid_desc'); ?></span>
             </div>
 

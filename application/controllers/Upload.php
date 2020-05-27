@@ -54,7 +54,8 @@ class Upload extends CI_Controller {
                         'title'         =>  $this->input->post('vid_title'),
                         'description'   =>  $this->input->post('vid_desc'),
                         'author'        =>  $_SESSION['name'],
-                        'video'         =>  $upload_video['file_name']
+                        'video'         =>  $upload_video['file_name'],
+                        'type'          =>  $upload_video['file_ext']
                     );
 
                     //file is uploaded successfully
