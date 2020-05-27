@@ -92,7 +92,7 @@ class Forgot extends CI_Controller {
                 else {
 
                     $this->session->set_flashdata('error', 'I don\'t know why or how you triggered it <br>
-                    Report this problem thx!');
+                    But yea report this problem thx!');
                     redirect('login');
 
                 }

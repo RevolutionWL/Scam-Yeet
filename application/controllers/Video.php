@@ -13,11 +13,21 @@ class Video extends CI_Controller {
     public function play() {
 
         $vid = $this->uri->segment(3);
-        $this->db->where('video',$vid);
-        $vid = $this->db->get('video')->row_array();
-        $this->session->set_userdata($vid);
 
-        $this->load->view('video');
+        if (file_exists("./uploads/".$vid)) {
+
+            $this->db->where('video',$vid);
+            $vid = $this->db->get('video')->row_array();
+            $this->session->set_userdata($vid);
+
+            $this->load->view('video');
+
+        }
+        else {
+
+            $this->load->view('novideo');
+
+        }
 
     }  
     
