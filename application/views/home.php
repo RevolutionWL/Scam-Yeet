@@ -24,7 +24,6 @@
                 padding-bottom: 6rem;
             }
         }
-
         .jumbotron p:last-child {
             margin-bottom: 0;
         }
@@ -71,6 +70,9 @@
 
         <div class="album py-5 bg-light">
             <div class="container">
+                <?php if(isset($search)) { ?>
+                <h3 class="result">Search results for <?php echo $key?>:</h3>
+                <?php } ?>
                 <?php if ($vid_list) { ?>
                     <div class="row">
                         <?php foreach ($vid_list as $vid) : ?>
