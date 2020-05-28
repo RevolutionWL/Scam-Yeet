@@ -73,14 +73,14 @@
             <div class="container">
                 <?php if ($vid_list) { ?>
                     <div class="row">
-                        <?php foreach ($vid_list as $vid) : ?>
+                        <?php foreach (array_reverse($vid_list) as $vid) : ?>
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
                                     <a href="<?= base_url() . 'video/play/' . $vid->vid_id; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>
-                                        <p class="card-text"><?= $vid->description; ?></p>
+                                        <p class="card-text text-truncate"><?= $vid->description; ?></p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
