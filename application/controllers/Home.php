@@ -28,6 +28,8 @@ class Home extends CI_Controller {
 
         $keyword = $this->input->post('keyword');
         $info['vid_list'] = $this->video_model->search_vid($keyword);
+        $info['search'] = true;
+        $info['key'] = $keyword;
         $this->load->view('home',$info);
 
     }    

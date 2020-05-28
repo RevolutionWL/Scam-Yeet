@@ -55,7 +55,7 @@
 
         </style>
 
-<title>UwU Video</title>
+<title><?php echo $_SESSION['title'];?></title>
 </head>
 <body>
 
