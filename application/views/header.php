@@ -12,7 +12,7 @@
                 <!-- php syntax for if log in -->
                 <?php if (isset($_SESSION['id'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="upload">Upload</a>
+                        <a class="nav-link" href="<?= base_url() . '/upload' ?>">Upload</a>
                     </li>
 
                     <li class="nav-item dropdown">
