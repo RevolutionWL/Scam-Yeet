@@ -24,6 +24,7 @@
                 padding-bottom: 6rem;
             }
         }
+
         .jumbotron p:last-child {
             margin-bottom: 0;
         }
@@ -61,7 +62,7 @@
             <div class="container">
                 <h1>Videos of the World</h1>
                 <p class="lead text-muted">Search for any videos!</p>
-                <form class="form-inline row justify-content-md-center" method="post" action="<?php echo base_url().'home/search'; ?>" >
+                <form class="form-inline row justify-content-md-center" method="post" action="<?php echo base_url() . 'home/search'; ?>">
                     <input class="form-control col-8 mr-sm-2" type="search" name="keyword" placeholder="Search">
                     <input class="btn btn-outline-success col-3" type="submit" value="Search"></input>
                 </form>
@@ -70,15 +71,15 @@
 
         <div class="album py-5 bg-light">
             <div class="container">
-                <?php if(isset($search)) { ?>
-                <h3 class="result">Search results for <?php echo $key?>:</h3>
+                <?php if (isset($search)) { ?>
+                    <h3 class="result">Search results for <?php echo $key ?>:</h3>
                 <?php } ?>
                 <?php if ($vid_list) { ?>
                     <div class="row">
                         <?php foreach (array_reverse($vid_list) as $vid) : ?>
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
-                                    <a href="<?= base_url() . 'video/play/' . $vid->vid_id; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
+                                    <a class="video" href="<?= base_url() . 'video/play/' . $vid->vid_id; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>
@@ -95,8 +96,7 @@
                             </div>
                         <?php endforeach ?>
                     <?php } else { ?>
-                        <h3>Sumimasen senpai no videos were uploaded ;w; <br />Onnegai senapi~ please click this button to upload </h4>
-                            <a href="<?= base_url() . 'upload'; ?>" class="btn btn-primary">Upload</a>
+                        <p class="lead text-muted">There are currently no videos available.</p>
                     </div>
                 <?php } ?>
 
@@ -136,6 +136,25 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
+        Notification.requestPermission().then(function(result) {
+            console.log(result);
+        });
+        var videos = document.getElementsByClassName('video');
+
+        // console.log(videos);
+        // console.log(Notification.permission);
+        // console.log(window.Notification);
+
+        videos[0].addEventListener('click', function() {
+            alert('hi');
+            if (Notification.permission === "granted") {
+                var text = 'OWO you clicked a videooo';
+                var notification = new Notification('UwU', {
+                    body: text
+                });
+            }
+
+        });
         window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.5/js/vendor/jquery.slim.min.js"><\/script>')
     </script>
     <script src="https://getbootstrap.com/docs/4.5/dist/js/bootstrap.bundle.js"></script>
