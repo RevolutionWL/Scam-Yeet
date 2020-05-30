@@ -8,7 +8,7 @@
   <style type="text/css">
     .jumbotron {
       margin-bottom: 0;
-      padding: 0 !important;
+      padding: 1% 0 0 0 !important;
       background-color: #fff;
     }
 
@@ -25,7 +25,10 @@
     .jumbotron h1 {
       font-weight: 300;
     }
-
+    .btn {
+      padding-left: 3% !important;
+      padding-right: 3% !important;
+    }
 
     footer {
       padding-top: 3rem;
@@ -36,29 +39,9 @@
       margin-bottom: .25rem;
     }
 
-    /* 
     video {
       background: black;
     }
-
-    #top {
-      margin-bottom: 20px;
-      border-style: solid;
-    }
-
-    #top h1 {
-      margin-top: 0;
-    }
-
-    form {
-      padding: 10px;
-      border-style: solid;
-    }
-
-    #allcomment {
-      margin-bottom: 10px;
-    }
-*/
     .container {
       padding: 0 !important;
     }
@@ -91,7 +74,7 @@
   <?php $this->load->view('header') ?>
   <div class="container">
 
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center mb-2">
       <video height=70% autoplay controls>
         <source src="<?= base_url() . 'uploads/' . $_SESSION['video'] ?>">
         <source src="<?= base_url() . 'uploads/' . $_SESSION['video'] ?>">
@@ -99,14 +82,18 @@
       </video>
     </section>
   </div>
-  <a class="btn btn-danger" href="<?php echo base_url(); ?>video/download" role="button">download</a>
-  <a class="btn btn-danger" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo current_url(); ?>" role="button">Share on Facebook</a>
-  <a class="btn btn-danger" href="https://twitter.com/share?url=<?php echo current_url().' Look!'; ?>" role="button">Share on twitter</a>
+  <div class="container mb-2">
+    <div class="row justify-content-md-center">
+      <a class="btn btn-outline-secondary mr-4" href="<?php echo base_url(); ?>video/download" role="button">Download</a>
+      <a class="btn btn-secondary mr-4" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo current_url(); ?>" role="button">Share on Facebook</a>
+      <a class="btn btn-secondary" href="https://twitter.com/share?url=<?php echo current_url() . ' Look!'; ?>" role="button">Share on Twitter</a>
+    </div>
+  </div>
 
   <div class="py-5 bg-light" class="lg-8">
     <div class="container">
       <h1><?php echo ($_SESSION['title']) ?></h1>
-      <h3 class="text-muted"><?php echo ($_SESSION['author']) ?></h3>
+      <h4 class="text-muted"><?php echo ($_SESSION['author']) ?></h4>
       <p class="lead text-muted"><?php echo ($_SESSION['description']) ?></p>
     </div>
     <!-- <?php var_dump($_SESSION) ?> -->
@@ -114,14 +101,20 @@
     <div class="container">
       <h4 class="mb-3">Comments</h4>
       <form method="post" action="<?php echo base_url(); ?>video/post">
-        <div class="comment">
-          <textarea name="comment" class="form-control" rows="1" placeholder="Add a comment..." required></textarea>
-          <input type="submit" class="btn btn-primary" value="post">
+        <div class="comment mb-4">
+          <textarea name="comment" class="form-control mb-2" rows="2" placeholder="Add a comment..." required></textarea>
+          <div class="d-flex flex-row-reverse">
+            <input type="submit" class="btn btn-primary p-2" value="Post">
+          </div>
         </div>
         <div id='allcomment'>
           <?php foreach (array_reverse($all_comment) as $comment) : ?>
-            <h4><strong><?= $comment->user; ?></strong></h4>
-            <p><?= $comment->content; ?></p>
+            <div class="card mb-2">
+              <div class="card-body">
+                <h5 class="card-title"><?= $comment->user; ?></h5>
+                <p class="card-text"><?= $comment->content; ?></p>
+              </div>
+            </div>
           <?php endforeach ?>
         </div>
     </div>
