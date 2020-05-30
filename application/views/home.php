@@ -146,7 +146,6 @@
         // console.log(window.Notification);
 
         videos[0].addEventListener('click', function() {
-            alert('hi');
             if (Notification.permission === "granted") {
                 var text = 'OWO you clicked a videooo';
                 var notification = new Notification('UwU', {
