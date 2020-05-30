@@ -134,30 +134,20 @@
             <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p>
         </div>
     </footer>
-    <?php if($this->session->flashdata()) {?>
-            <script>
-            alert('Successfully Uploaded!')
-            </script>
+    <?php if ($this->session->flashdata()) { ?>
+        <script>
+            if (Notification.permission === "granted") {
+                var text = 'OWO you uploaded a video';
+                var notification = new Notification('UwU', {
+                    body: text
+                });
+            }
+        </script>
     <?php } ?>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
         Notification.requestPermission().then(function(result) {
             console.log(result);
-        });
-        var videos = document.getElementsByClassName('video');
-
-        // console.log(videos);
-        // console.log(Notification.permission);
-        // console.log(window.Notification);
-
-        videos[0].addEventListener('click', function() {
-            if (Notification.permission === "granted") {
-                var text = 'OWO you clicked a videooo';
-                var notification = new Notification('UwU', {
-                    body: text
-                });
-            }
-
         });
         window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.5/js/vendor/jquery.slim.min.js"><\/script>')
     </script>

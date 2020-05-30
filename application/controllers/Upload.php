@@ -78,7 +78,6 @@ class Upload extends CI_Controller
                 $success['success'] = "success";
                 $this->session->set_flashdata($success);
                 redirect('home');
-                // redirect('home');
             }
         } else {
 
