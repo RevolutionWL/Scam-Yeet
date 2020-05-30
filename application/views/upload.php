@@ -50,7 +50,7 @@
             <hr class="mb-4">
             <div class="form-group row">
                 <div class="col-md-12 mb-3">
-                    <input type="submit" class="btn btn-primary" value="Upload" onClick="this.disabled=true; this.value='Uploading…';">
+                    <input type="submit" class="btn btn-primary" value="Upload" onClick="this.form.submit();this.disabled=true; this.value='Uploading…';">
                 </div>
             </div>
             </form>
