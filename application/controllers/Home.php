@@ -11,14 +11,19 @@ class Home extends CI_Controller {
     }
 
     public function index() {
+
         if($this->session->flashdata()){
-            $info['success'] = $this->session->flashdata();
+
+            $info['video'] = $this->session->flashdata('success');
+
         }
+
         $info['vid_list'] = $this->video_model->get_all_vid();      
         $this->load->view('home', $info);
 
     }
 
+    //Logout and destroy sessiondata
     public function logout() {
 
         $this->session->sess_destroy();    
@@ -26,6 +31,7 @@ class Home extends CI_Controller {
 
     }
 
+    //Search video
     public function search() {
 
         $keyword = $this->input->post('keyword');

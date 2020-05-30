@@ -19,8 +19,10 @@ class Upload extends CI_Controller
 
                 $this->load->view('upload', $this->session->flashdata());
             }
-
-            $this->load->view('upload', array('error' => ' '));
+            else {
+                
+                $this->load->view('upload', array('error' => ' '));
+            }
         } else {
 
             redirect('home');
@@ -67,15 +69,10 @@ class Upload extends CI_Controller
                     'type'          =>  $upload_video['file_ext']
                 );
 
-
-                //file is uploaded successfully
-                //now get the file uploaded data 
-                //get the uploaded file name
-
                 //store vid data to the db
                 $this->video_model->store_video($data);
                 
-                $success['success'] = "success";
+                $success['success'] = $this->input->post('vid_title');
                 $this->session->set_flashdata($success);
                 redirect('home');
             }

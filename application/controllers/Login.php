@@ -62,6 +62,7 @@ class Login extends CI_Controller {
 
                 if($result == '') {
 
+                    //Set cookie
                     if ($this->input->post("setremember"))
                     {
                         //Create cookies for 10 years
@@ -77,6 +78,7 @@ class Login extends CI_Controller {
                         
                     }
                     
+                    //Check if user have set up a profile
                     if($_SESSION['profile'] == 'no') {
         
                         redirect('profile');

@@ -28,6 +28,7 @@ class Profile extends CI_Controller {
 
     }
 
+    //Save profile
     public function save() {
 
         $this->form_validation->set_rules('firstname', 'firstname', 'required');
