@@ -50,7 +50,7 @@
             <hr class="mb-4">
             <div class="form-group row">
                 <div class="col-md-12 mb-3">
-                    <input id="upload" type="submit" class="btn btn-primary" value="Upload">
+                    <input type="submit" class="btn btn-primary" value="Upload" onClick="this.disabled=true; this.value='Uploading…';">
                 </div>
             </div>
             </form>
@@ -68,12 +68,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>
-        var button = document.getElementById('upload');
-
-        button.addEventListener('click', function(){
-            button.disabled = true
-            button.value = "Uploading..."
-        })
         window.jQuery || document.write('<script src="https://getbootstrap.com/docs/4.5/js/vendor/jquery.slim.min.js"><\/script>')
     </script>
     <script src="https://getbootstrap.com/docs/4.5/dist/js/bootstrap.bundle.js"></script>
