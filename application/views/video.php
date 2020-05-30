@@ -100,7 +100,8 @@
     </section>
   </div>
   <a class="btn btn-danger" href="<?php echo base_url(); ?>video/download" role="button">download</a>
-  <a class="btn btn-danger" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo current_url(); ?>" role="button">Share</a>
+  <a class="btn btn-danger" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo current_url(); ?>" role="button">Share on Facebook</a>
+  <a class="btn btn-danger" href="https://twitter.com/share?url=<?php echo current_url().' Look!'; ?>" role="button">Share on twitter</a>
 
   <div class="py-5 bg-light" class="lg-8">
     <div class="container">
