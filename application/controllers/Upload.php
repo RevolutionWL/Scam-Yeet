@@ -58,6 +58,7 @@ class Upload extends CI_Controller
             } else {
 
                 $upload_video = $this->upload->data();
+
                 $data = array(
                     'title'         =>  $this->input->post('vid_title'),
                     'description'   =>  $this->input->post('vid_desc'),
@@ -65,22 +66,19 @@ class Upload extends CI_Controller
                     'video'         =>  $upload_video['file_name'],
                     'type'          =>  $upload_video['file_ext']
                 );
-                echo ("<script>
-                    if (Notification.permission === 'granted') {
-                        var text = 'OWO you uploaded a video <3';
-                        var notification = new Notification('UwU', {
-                            body: text
-                        });
-                    }
-                </script>");
+
 
                 //file is uploaded successfully
                 //now get the file uploaded data 
                 //get the uploaded file name
 
-                //store pic data to the db
+                //store vid data to the db
                 $this->video_model->store_video($data);
+                
+                $success['success'] = "success";
+                $this->session->set_flashdata($success);
                 redirect('home');
+                // redirect('home');
             }
         } else {
 
