@@ -20,12 +20,12 @@
                             <?php echo $_SESSION['name']; ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="<?= base_url() . 'profile' ?>">my pwofile owo</a>
-                            <a class="dropdown-item" href="<?= base_url() . 'home/logout' ?>">Log me out onegai</a>
+                            <a class="dropdown-item" href="<?= base_url() . 'profile' ?>">My Profile</a>
+                            <a class="dropdown-item" href="<?= base_url() . 'home/logout' ?>">Log Out</a>
                         </div>
                     </li>
                 <?php } else { ?>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= base_url() . 'login' ?>">Login <span class="sr-only">(current)</span></a>
                     </li>
                 <?php } ?>

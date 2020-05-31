@@ -63,26 +63,6 @@
                     <input class="form-control" name="contact" type="text" value="<?php echo $_SESSION['contact']; ?>">
                     <span class="text-danger"><?php echo form_error('contact'); ?></span>
                 </div>
-
-                <hr class="mb-4">
-
-                <h4>Change Password</h4>
-                <p class="text-muted">You may leave these fields blank if you do not wish to change your password.</p>
-
-                <div class="mb-3">
-                    <label for="address">Current Password</label>
-                    <input class="form-control" name="password" type="password">
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="password">New Password</label>
-                        <input type="password" class="form-control" id="new-password" placeholder="">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="confirm-password">Confirm New Password</label>
-                        <input type="password" class="form-control" id="confirm-password" placeholder="">
-                    </div>
-                </div>
                 <hr class="mb-4">
                 <div class="form-group row">
                     <div class="col-md-6 mb-3">
@@ -97,7 +77,7 @@
     </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2020 Company Name</p>
+        <p class="mb-1">&copy; 2020 RevoTube</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Privacy</a></li>
             <li class="list-inline-item"><a href="#">Terms</a></li>

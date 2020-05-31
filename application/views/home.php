@@ -84,13 +84,7 @@
                                         <h5 class="card-title"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>
                                         <p class="card-text text-truncate"><?= $vid->description; ?></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

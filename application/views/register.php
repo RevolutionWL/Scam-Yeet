@@ -2,10 +2,7 @@
 <html>
 
     <head>
-        
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+        <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 
@@ -23,14 +20,11 @@
         <style type = "text/css">
             
             body {
-                color: #fff;
-                background: #63738a;
-                font-family: 'Roboto', sans-serif;
+                background: #343a40;
             }
             .panel-head {
-                width: 600px;
+                width: 50%;
                 margin: 0 auto;
-                color: #999;
                 border-radius: 3px;
                 margin-bottom: 15px;
                 background: #f2f3f7;
@@ -59,6 +53,11 @@
                 right: 0;
             }
 
+            h1 {
+                color: #fff;
+                margin-top: 100px;
+            }
+
         </style>
 
         <title>RevoTube Register</title>
@@ -67,13 +66,9 @@
 
     <body>
         <div class="container">
-            <br />
-            <h1 align="center">Your Journey To Endless Possibilities</h1>
-            <br />
+            <h1 class="mb-4" align="center">Register An Account</h1>
 
             <div class="panel-head">
-
-                <h3>Register Your Account</h3>
 
                 <div class="panel-body">
                     <?php
@@ -110,17 +105,19 @@
                         <div class="form-group">
                             <label>Password</label>
                             <input type="password" name="user_pass" class="form-control" value="<?php echo set_value('user_pass'); ?>"/>
+                            <small class="form-text text-muted">Passwords must contain at least a symbol, uppercase and lower case letters, and a number. </small>
                             <span class ="text-danger"><?php echo form_error('user_pass'); ?></span>
                         </div>
-                        
+                        <hr class="mb-3" />
                         <div class="form-group">
-                        <p id="captImg"><?php echo $captchaImg; ?></p>
-                        <p>Can't read the image? click <a href="javascript:void(0);" class="refreshCaptcha">here</a> to refresh.</p>
-                            <input type="text" name="captcha" value=""/>
+                        <label>To continue, type the characters you see in the picture.</label>
+                        <div id="captImg"><?php echo $captchaImg; ?></div>
+                        <small class="text-muted">Can't read the image? click <a href="javascript:void(0);" class="refreshCaptcha">here</a> to refresh.</small>
+                            <input type="text" class="form-control" name="captcha" value=""/>
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" name="register" class="btn btn-info" value="Register" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" name="register" class="btn btn-primary" value="Register" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="<?php echo base_url(); ?>login">Login</a>
                         </div>
 
