@@ -37,13 +37,9 @@
             max-width: 40rem;
         }
 
-        footer {
-            padding-top: 3rem;
-            padding-bottom: 3rem;
-        }
-
-        footer p {
-            margin-bottom: .25rem;
+        .video-bg {
+            background-color: #000;
+            border-radius: 3px 3px 0 0;
         }
     </style>
 
@@ -79,12 +75,14 @@
                         <?php foreach (array_reverse($vid_list) as $vid) : ?>
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
-                                    <a class="video" href="<?= base_url() . 'video/play/' . $vid->vid_id; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
+                                    <div class="video-bg">
+                                        <a class="video" href="<?= base_url() . 'video/play/' . $vid->vid_id; ?>" target="_self"><video src="<?= base_url() . 'uploads/' . $vid->video; ?>" width="100%" height="225"></a>
+                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $vid->title; ?></h5>
+                                        <h5 class="card-title text-truncate"><?= $vid->title; ?></h5>
                                         <h6 class="card-subtitle mb-2 text-muted"><?= $vid->author; ?></h6>
                                         <p class="card-text text-truncate"><?= $vid->description; ?></p>
-                                        
+
                                     </div>
                                 </div>
                             </div>
