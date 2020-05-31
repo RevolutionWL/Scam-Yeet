@@ -15,7 +15,7 @@
         }
 
         .container h1 {
-            margin-top: 100px;
+            margin-top: 60px;
             color: #fff;
         }
 
@@ -46,7 +46,7 @@
 </head>
 
 <body>
-
+    <?php $this->load->view('header') ?>
     <div class="container">
 
         <br />

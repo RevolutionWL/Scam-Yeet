@@ -98,9 +98,9 @@ class Register extends CI_Controller {
                 if($id > 0) {
 
                     $subject = "Verify your account";
-                    $message = "<p>Howdy ".$this->input->post('user_name')."!</p>
-                                <p>Verify your account 
-                                <a href='".base_url()."register/verifies/".$verification_key."'>here</a></p>";
+                    $message = "<p>Hello ".$this->input->post('user_name')."!</p>
+                                <p>Thank you for registering with RevoTube. Please activate your account
+                                <a href='".base_url()."register/verifies/".$verification_key."'>here!</a></p>";
 
                     $config = array(
                         'protocol'      =>  'smtp',
@@ -115,7 +115,7 @@ class Register extends CI_Controller {
                         'wordwrap'      =>  TRUE
                     );
                     $this->load->library('email', $config);
-                    $this->email->from('','Sebastian @ RevoTube_Support');
+                    $this->email->from('','RevoTube Support');
                     $this->email->to($this->input->post('user_email'));
                     $this->email->subject($subject);
                     $this->email->message($message);
@@ -193,20 +193,18 @@ class Register extends CI_Controller {
             
             if($this->register_model->verifies($verifies_key)) {
 
-                $data["message"] = "<h1 align='center'> Your email has
-                                    been verified, you can now log in 
-                                    from <a href='".base_url()."login'>here</a>
-                                    </h1>";
+                $data["message"] = "Your email has
+                                    been verified, you may now log in 
+                                    from <a href='".base_url()."login'>here</a>.";
 
             }
             else {
 
-                $data["message"] = "<h1 align=center> Email has already
+                $data["message"] = "Your email has already
                                     been verified.
                                     <br>
-                                    You can log in your account 
-                                    <a href='".base_url()."login'>here</a
-                                    ></h1>";
+                                    You may log into your account 
+                                    <a href='".base_url()."login'>here</a>.";
                 
             }
 

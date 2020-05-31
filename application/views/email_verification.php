@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<head>
+
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css">
 
 
-        <title>User Verification</title>
+    <title>User Verification</title>
 
-    </head>
+</head>
 
-    <body>
+<body class="bg-light">
+    <?php $this->load->view('header') ?>
+    <div class="container">
 
-        <div class="container">
+        <br>
+        <h1 align='center'> RevoTube Verification </h1>
+        <br>
 
-            <br>
-            <h1 align='center'> RevoTube verification </h1>
-            <br>
+        <p align='center'><?php echo $message; ?></p>
 
-            <?php echo $message; ?>
+    </div>
 
-        </div>
-
-    </body>
+</body>
 
 </html>

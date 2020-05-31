@@ -42,24 +42,22 @@ class Forgot extends CI_Controller {
                 if($this->session->tempdata('code')) {
 
                     $temp = $this->session->tempdata();
-                    $message = "<p>Howdy there!</p>
-                    <p>You've requested to reset your password</p>
-                    <p>Click on this link to reset it now.</p> 
-                    <a href='".base_url()."forgot/validate/".$temp['code']."'>Link</a>
-                    <p>Ignore this email if you didn't request it</p>
-                    <p>Note this link will expire in 5 minutes</p>";
+                    $message = "<p>Hello!</p>
+                    <p>You have requested to reset your password.</p>
+                    <p>Click <a href='".base_url()."forgot/validate/".$temp['code']."'>here</a> to reset it now.</p> 
+                    <p>Ignore this email if you didn't request it.</p>
+                    <p>Note that this link will expire in 5 minutes.</p>";
 
                 }
                 else {
 
                     $temp = md5(rand());
                     $this->session->set_tempdata('code', $temp, 300);
-                    $message = "<p>Howdy there!</p>
-                    <p>You've requested to reset your password</p>
-                    <p>Click on this link to reset it now.</p> 
-                    <a href='".base_url()."forgot/validate/".$temp."'>Link</a>
-                    <p>Ignore this email if you didn't request it</p>
-                    <p>Note this link will expire in 5 minutes</p>";
+                    $message = "<p>Hello!</p>
+                    <p>You have requested to reset your password.</p>
+                    <p>Click <a href='".base_url()."forgot/validate/".$temp."'>here</a> to reset it now.</p>
+                    <p>Ignore this email if you didn't request it.</p>
+                    <p>Note that this link will expire in 5 minutes.</p>";
 
                 }
                 
@@ -77,7 +75,7 @@ class Forgot extends CI_Controller {
                     'wordwrap'      =>  TRUE
                 );
                 $this->load->library('email', $config);
-                $this->email->from('','Sebastian @ RevoTube_Support');
+                $this->email->from('','RevoTube Support');
                 $this->email->to($this->input->post('user_email'));
                 $this->email->subject($subject);
                 $this->email->message($message);
@@ -122,7 +120,7 @@ class Forgot extends CI_Controller {
         }
         else {
 
-            $this->session->set_flashdata('error', 'The link expired please request again!');
+            $this->session->set_flashdata('error', 'The link has expired, please request again!');
             redirect('login');
 
         }

@@ -10,7 +10,7 @@
     <style>
         body {
             color: #fff;
-            background: #63738a;
+            background: #343a40;
         }
 
         .container h1 {
@@ -34,9 +34,9 @@
 </head>
 
 <body>
+    <?php $this->load->view('header') ?>
     <div class="container">
-        <h1 align="center">UwU Hewwo senpai ~~ <br />
-            It's twme to weset your passwowd ~~ </h1>
+        <h1 align="center">Reset Password</h1>
         <div class="content">
             <?php
             if ($this->session->flashdata('error')) {
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div align="right">
-                    <input type="submit" class="btn btn-info" value="Onnegai">
+                    <input type="submit" class="btn btn-primary" value="Confirm">
                 </div>
             </form>
         </div>
