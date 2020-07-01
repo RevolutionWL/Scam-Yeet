@@ -43,7 +43,7 @@ class Profile extends CI_Controller {
             );
 
             $this->register_model->update($data);
-
+            $this->session->set_flashdata('success', 'Sucessfully updated profile!');
             redirect('profile');
         }
         else {

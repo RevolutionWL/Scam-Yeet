@@ -32,6 +32,14 @@
         <div class="col-md-9 order-md-2 center">
             <h4 class="mb-3">Update Profile</h4>
             <form method="post" action="<?php echo base_url(); ?>profile/save" role="form">
+            <?php
+            if ($this->session->flashdata('success')) {
+
+                echo '<div class="alert alert-success">
+                                ' . $this->session->flashdata("success") . '
+                                </div>';
+            }
+            ?>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">First name</label>
