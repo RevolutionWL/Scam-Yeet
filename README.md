@@ -1,11 +1,7 @@
 # Scam Yeet
-
 INFS3203 Assignment - Video Sharing Platform
 
-Controller is where and what your server does
-
-View is what your client see
-
-Model is where you store data
-
-Before using remember to add these files 'uploads' and 'Icaptcha' (caps sensitive) 
+<h1><u>MVC TL:DR</u></h1> 
+Controller is where and what your server does <br>
+View is what your client see<br>
+Model is where you store data<br>
